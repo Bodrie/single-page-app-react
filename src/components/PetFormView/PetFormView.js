@@ -1,27 +1,15 @@
-import * as petService from '../../services/petService';
 
-const CreatePet = ({ history }) => {
-
-    const onPetCreateSubmitHandler = (e) => {
-        e.preventDefault();
-
-        const { name, description, imageURL, category } = e.target;
-
-        petService.create(name.value, description.value, imageURL.value, category.value)
-            .then(() => {
-                history.push('/');
-            })
-    };
+const PetFormView = ({ onSubmitHandler , petName, setPetName }) => {
 
     return (
         <section className="create">
-            <form onSubmit={onPetCreateSubmitHandler}>
+            <form onSubmit={onSubmitHandler}>
                 <fieldset>
                     <legend>Add new Pet</legend>
                     <p className="field">
                         <label htmlFor="name">Name</label>
                         <span className="input">
-                            <input type="text" name="name" id="name" placeholder="Name" />
+                            <input type="text" name="name" value={petName} onChange={(e) => setPetName(e.target.value)} id="name" placeholder="Name" />
                             <span className="actions"></span>
                         </span>
                     </p>
@@ -61,4 +49,4 @@ const CreatePet = ({ history }) => {
 
 };
 
-export default CreatePet;
+export default PetFormView;
